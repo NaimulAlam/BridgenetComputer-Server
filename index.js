@@ -22,18 +22,10 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 client.connect((err) => {
-  const ServiceCollection = client
-    .db("bridgenetComputer")
-    .collection("services");
-  const BookingsCollection = client
-    .db("bridgenetComputer")
-    .collection("bookings");
-  const ReviewsCollection = client
-    .db("bridgenetComputer")
-    .collection("reviews");
-  const AdminCollection = client
-    .db("bridgenetComputer")
-    .collection("Admin");
+  const ServiceCollection = client.db("bridgenetComputer").collection("services");
+  const BookingsCollection = client.db("bridgenetComputer").collection("bookings");
+  const ReviewsCollection = client.db("bridgenetComputer").collection("reviews");
+  const AdminCollection = client.db("bridgenetComputer").collection("Admin");
 
   app.get("/services", (req, res) => {
     ServiceCollection.find({}).toArray((err, items) => {
@@ -81,7 +73,7 @@ client.connect((err) => {
       res.send(result.insertedCount > 0);
     });
   });
- 
+
   app.post("/addBooking", (req, res) => {
     const newBooking = req.body;
     BookingsCollection.insertOne(newBooking).then((result) => {
@@ -93,6 +85,14 @@ client.connect((err) => {
     BookingsCollection.find({ email: req.query.email }).toArray(
       (err, documents) => {
         res.send(documents);
+      }
+    );
+  });
+  
+  app.get("/isAdmin", (req, res) => {
+    AdminCollection.find({ email: req.query.email }).toArray(
+      (err, documents) => {
+        res.send(documents[0]);
       }
     );
   });
