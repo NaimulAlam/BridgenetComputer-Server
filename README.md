@@ -1,6 +1,6 @@
 # A Complete Service Providing Website 
 
-This project was bootstrapped with [Live Website Link](https://link).
+This project was bootstrapped with [Live Website Link](https://bridgenet-computer.web.app/).
 
 ## Available Features
 - [x] nodemon 
@@ -8,5 +8,4 @@ This project was bootstrapped with [Live Website Link](https://link).
 - [x] MongoDB
 - [x] cors
 - [x] body-parser
-- [x] stripe
 - [x] dotenv
