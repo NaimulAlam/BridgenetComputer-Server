@@ -89,10 +89,10 @@ client.connect((err) => {
     );
   });
   
-  app.get("/isAdmin", (req, res) => {
-    AdminCollection.find({ email: req.query.email }).toArray(
-      (err, documents) => {
-        res.send(documents[0]);
+  app.post("/isAdmin", (req, res) => {
+    AdminCollection.find({ email: req.body.email }).toArray(
+      (err, admin) => {
+        res.send(admin.length > 0);
       }
     );
   });
