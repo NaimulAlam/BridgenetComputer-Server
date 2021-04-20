@@ -31,6 +31,9 @@ client.connect((err) => {
   const ReviewsCollection = client
     .db("bridgenetComputer")
     .collection("reviews");
+  const AdminCollection = client
+    .db("bridgenetComputer")
+    .collection("Admin");
 
   app.get("/services", (req, res) => {
     ServiceCollection.find({}).toArray((err, items) => {
@@ -72,6 +75,13 @@ client.connect((err) => {
     });
   });
 
+  app.post("/addAdmin", (req, res) => {
+    const newAdmin = req.body;
+    AdminCollection.insertOne(newAdmin).then((result) => {
+      res.send(result.insertedCount > 0);
+    });
+  });
+ 
   app.post("/addBooking", (req, res) => {
     const newBooking = req.body;
     BookingsCollection.insertOne(newBooking).then((result) => {
